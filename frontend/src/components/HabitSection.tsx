@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Habit } from "../types";
+import "../styles/habits.css";
 
 const dayOptions = [
   "Mánudagur",
@@ -77,7 +78,9 @@ export default function HabitSection() {
     setNewHabitName(habit.name);
     setTimeOfDay(habit.timeOfDay);
     setSelectedDays(
-      habit.days.map((day) => englishToIcelandicDay[day.dayOfWeek] ?? day.dayOfWeek),
+      habit.days.map(
+        (day) => englishToIcelandicDay[day.dayOfWeek] ?? day.dayOfWeek,
+      ),
     );
   }
 
@@ -117,17 +120,20 @@ export default function HabitSection() {
 
     try {
       if (editingHabitId !== null) {
-        const res = await fetch(`http://localhost:3000/habits/${editingHabitId}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
+        const res = await fetch(
+          `http://localhost:3000/habits/${editingHabitId}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: newHabitName,
+              timeOfDay,
+              days: daysForBackend,
+            }),
           },
-          body: JSON.stringify({
-            name: newHabitName,
-            timeOfDay,
-            days: daysForBackend,
-          }),
-        });
+        );
 
         const updatedHabit: Habit = await res.json();
 
@@ -166,9 +172,12 @@ export default function HabitSection() {
 
   async function handleCompleteHabit(habitId: number) {
     try {
-      const res = await fetch(`http://localhost:3000/habits/${habitId}/complete`, {
-        method: "POST",
-      });
+      const res = await fetch(
+        `http://localhost:3000/habits/${habitId}/complete`,
+        {
+          method: "POST",
+        },
+      );
 
       if (!res.ok) {
         const errorData = await res.json();
@@ -193,10 +202,10 @@ export default function HabitSection() {
   );
 
   return (
-    <section>
+    <section className="habit-section">
       <h2>Venjur</h2>
 
-      <form onSubmit={handleAddHabit}>
+      <form className="habit-form" onSubmit={handleAddHabit}>
         <input
           type="text"
           placeholder="Ný venja"
@@ -213,9 +222,9 @@ export default function HabitSection() {
           <option value="night">Kvöld</option>
         </select>
 
-        <div>
+        <div className="habit-day-options">
           {dayOptions.map((day) => (
-            <label key={day} style={{ marginRight: "0.75rem" }}>
+            <label key={day} className="habit-day-option">
               <input
                 type="checkbox"
                 checked={selectedDays.includes(day)}
@@ -226,55 +235,57 @@ export default function HabitSection() {
           ))}
         </div>
 
-        <button type="submit">
-          {editingHabitId !== null ? "Vista breytingar" : "Bæta við venju"}
-        </button>
-
-        {editingHabitId !== null && (
-          <button
-            type="button"
-            onClick={() => {
-              setEditingHabitId(null);
-              setNewHabitName("");
-              setTimeOfDay("morning");
-              setSelectedDays([]);
-            }}
-          >
-            Hætta við
+        <div className="habit-form-actions">
+          <button type="submit">
+            {editingHabitId !== null ? "Vista breytingar" : "Bæta við venju"}
           </button>
-        )}
+
+          {editingHabitId !== null && (
+            <button
+              type="button"
+              onClick={() => {
+                setEditingHabitId(null);
+                setNewHabitName("");
+                setTimeOfDay("morning");
+                setSelectedDays([]);
+              }}
+            >
+              Hætta við
+            </button>
+          )}
+        </div>
       </form>
 
-      <div>
+      <div className="habit-group">
         <h3>Venjur dagsins</h3>
 
         {todaysHabits.length === 0 && <p>Engar venjur áætlaðar í dag.</p>}
 
         {todaysHabits.length > 0 && (
-          <ul>
+          <ul className="habit-list">
             {todaysHabits.map((habit) => {
               const completedToday = isCompletedToday(habit.completions);
 
               return (
                 <li
                   key={habit.id}
-                  style={{ opacity: completedToday ? 0.6 : 1 }}
+                  className={`habit-item ${completedToday ? "completed" : ""}`}
                 >
-                  <strong>{habit.name}</strong> -{" "}
-                  {timeLabels[habit.timeOfDay] ?? habit.timeOfDay} - Streak:{" "}
-                  {habit.streak}
-                  <button
-                    type="button"
-                    onClick={() => handleCompleteHabit(habit.id)}
-                    disabled={completedToday}
-                    style={{
-                      marginLeft: "0.5rem",
-                      opacity: completedToday ? 0.5 : 1,
-                      cursor: completedToday ? "default" : "pointer",
-                    }}
-                  >
-                    {completedToday ? "✔ Búið" : "Búið í dag"}
-                  </button>
+                  <div className="habit-main">
+                    <strong>{habit.name}</strong> -{" "}
+                    {timeLabels[habit.timeOfDay] ?? habit.timeOfDay} - Streak:{" "}
+                    {habit.streak}
+                  </div>
+
+                  <div className="habit-actions">
+                    <button
+                      type="button"
+                      onClick={() => handleCompleteHabit(habit.id)}
+                      disabled={completedToday}
+                    >
+                      {completedToday ? "✔ Búið" : "Búið í dag"}
+                    </button>
+                  </div>
                 </li>
               );
             })}
@@ -286,52 +297,50 @@ export default function HabitSection() {
 
       {!loading && habits.length === 0 && <p>Engar venjur enn.</p>}
 
-      <div>
+      <div className="habit-group">
         <h3>Allar venjur</h3>
-        <ul>
+        <ul className="habit-list">
           {habits.map((habit) => {
             const completedToday = isCompletedToday(habit.completions);
 
             return (
               <li
                 key={habit.id}
-                style={{ opacity: completedToday ? 0.6 : 1 }}
+                className={`habit-item ${completedToday ? "completed" : ""}`}
               >
-                <strong>{habit.name}</strong> -{" "}
-                {timeLabels[habit.timeOfDay] ?? habit.timeOfDay}
-                <br />
-                Dagar:{" "}
-                {habit.days
-                  .map((day) => englishToIcelandicDay[day.dayOfWeek] ?? day.dayOfWeek)
-                  .join(", ")}
-                <br />
-                Streak: {habit.streak}
-                <br />
-                <button
-                  type="button"
-                  onClick={() => handleCompleteHabit(habit.id)}
-                  disabled={completedToday}
-                  style={{
-                    opacity: completedToday ? 0.5 : 1,
-                    cursor: completedToday ? "default" : "pointer",
-                  }}
-                >
-                  {completedToday ? "✔ Búið" : "Búið í dag"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleStartEdit(habit)}
-                  style={{ marginLeft: "0.5rem" }}
-                >
-                  Breyta
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleDeleteHabit(habit.id)}
-                  style={{ marginLeft: "0.5rem" }}
-                >
-                  Eyða
-                </button>
+                <div className="habit-main">
+                  <strong>{habit.name}</strong> -{" "}
+                  {timeLabels[habit.timeOfDay] ?? habit.timeOfDay}
+                  <br />
+                  Dagar:{" "}
+                  {habit.days
+                    .map(
+                      (day) =>
+                        englishToIcelandicDay[day.dayOfWeek] ?? day.dayOfWeek,
+                    )
+                    .join(", ")}
+                  <br />
+                  Streak: {habit.streak}
+                </div>
+
+                <div className="habit-actions">
+                  <button
+                    type="button"
+                    onClick={() => handleCompleteHabit(habit.id)}
+                    disabled={completedToday}
+                  >
+                    {completedToday ? "✔ Búið" : "Búið í dag"}
+                  </button>
+                  <button type="button" onClick={() => handleStartEdit(habit)}>
+                    Breyta
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteHabit(habit.id)}
+                  >
+                    Eyða
+                  </button>
+                </div>
               </li>
             );
           })}

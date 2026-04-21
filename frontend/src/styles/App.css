@@ -1,121 +1,53 @@
+:root {
+  --primary: #4f46e5;
+  --bg: #f3f4f8;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --text: #1f2937;
+}
+
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f5f6fa;
-  color: #222;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.app {
-  padding: 2rem;
-  max-width: 1800px;
-  margin: 0 auto;
-}
-
-.app h1 {
-  margin-bottom: 1.5rem;
-}
-
-.layout {
-  display: grid;
-  grid-template-columns: 1fr 2fr 2fr;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-section {
-  background: white;
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-}
-
-form {
-  margin-bottom: 1rem;
-}
-
-input,
-select,
-button {
-  padding: 0.55rem 0.7rem;
-  margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
-  border: 1px solid #d0d5dd;
-  border-radius: 8px;
-  font: inherit;
+  background: var(--bg);
+  background: #f3f4f8;
+  color: var(--text);
 }
 
 button {
-  cursor: pointer;
-  background: #4f46e5;
+  background: var(--primary);
   color: white;
   border: none;
+  border-radius: 10px;
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
 }
 
 button:disabled {
   opacity: 0.5;
-  cursor: default;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  margin-bottom: 0.75rem;
-}
-
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 0.75rem;
-  margin-top: 1rem;
-}
-
-.calendar-header-cell {
-  font-weight: bold;
-  text-align: center;
-}
-
-.calendar-cell {
-  min-height: 120px;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
+input,
+select {
+  border: 1px solid var(--border);
   border-radius: 10px;
-  background: #fff;
+  padding: 0.6rem;
 }
 
-.calendar-cell.empty {
-  background: transparent;
-  border: none;
-}
-
-.calendar-cell.today {
-  border: 2px solid #4f46e5;
-}
-
-.calendar-date {
-  font-weight: bold;
+.app h1 {
   margin-bottom: 0.5rem;
 }
 
-.calendar-task-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.navigation {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.calendar-task-list li {
-  font-size: 0.9rem;
-  margin-bottom: 0.35rem;
+.app-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
-.completed-task {
-  text-decoration: line-through;
-  opacity: 0.6;
+.content {
+  width: 100%;
 }

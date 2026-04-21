@@ -1,0 +1,51 @@
+.list-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  transition: background 0.2s;
+}
+
+.list-item:hover {
+  background: #eef2ff;
+}
+
+.list-item.active {
+  background: #4f46e5;
+  color: white;
+}
+
+.list-select-btn {
+  background: none;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  color: inherit;
+}
+
+.list-delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ef4444;
+  font-size: 0.9rem;
+}
+
+.list-item.active .list-delete-btn {
+  color: #fca5a5;
+}

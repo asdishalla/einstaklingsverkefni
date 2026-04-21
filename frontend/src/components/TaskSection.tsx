@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Task } from "../types";
+import "../styles/tasks.css";
 
 type TaskSectionProps = {
   selectedListId: number | null;
@@ -133,14 +134,14 @@ export default function TaskSection({ selectedListId }: TaskSectionProps) {
   }
 
   return (
-    <section>
+    <section className="task-section">
       <h2>Verkefni</h2>
 
       {selectedListId === null && <p>Veldu lista til þess að sjá verkefni.</p>}
 
       {selectedListId !== null && (
         <>
-          <form onSubmit={handleAddTask}>
+          <form className="task-form" onSubmit={handleAddTask}>
             <input
               type="text"
               placeholder="Nýtt verkefni"
@@ -180,39 +181,41 @@ export default function TaskSection({ selectedListId }: TaskSectionProps) {
             <p>Engin verkefni á þessum lista ennþá.</p>
           )}
 
-          <ul>
+          <ul className="task-list">
             {filteredTasks.map((task) => (
-              <li key={task.id}>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={task.completed}
-                    onChange={() => handleToggleCompleted(task)}
-                  />
-                  {task.title}
-                </label>
+              <li
+                key={task.id}
+                className={`task-item ${task.completed ? "completed" : ""}`}
+              >
+                <div className="task-main">
+                  <label className="task-label">
+                    <input
+                      type="checkbox"
+                      checked={task.completed}
+                      onChange={() => handleToggleCompleted(task)}
+                    />
+                    <span className="task-title">{task.title}</span>
+                  </label>
 
-                {task.dueDate && (
-                  <span style={{ marginLeft: "0.5rem" }}>
-                    ({new Date(task.dueDate).toLocaleString()})
-                  </span>
-                )}
+                  {task.dueDate && (
+                    <span className="task-due-date">
+                      {new Date(task.dueDate).toLocaleString()}
+                    </span>
+                  )}
+                </div>
 
-                <button
-                  type="button"
-                  onClick={() => handleDeleteTask(task.id)}
-                  style={{ marginLeft: "0.75rem" }}
-                >
-                  Eyða
-                </button>
+                <div className="task-actions">
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteTask(task.id)}
+                  >
+                    Eyða
+                  </button>
 
-                <button
-                  type="button"
-                  onClick={() => handleStartEdit(task)}
-                  style={{ marginLeft: "0.5rem" }}
-                >
-                  Breyta
-                </button>
+                  <button type="button" onClick={() => handleStartEdit(task)}>
+                    Breyta
+                  </button>
+                </div>
               </li>
             ))}
           </ul>

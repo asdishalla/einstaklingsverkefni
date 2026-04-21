@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Task } from "../types";
+import "../styles/calendar.css";
 
 function getDateKey(date: Date) {
   const year = date.getFullYear();
@@ -18,23 +19,29 @@ function getTasksForDate(tasks: Task[], date: Date) {
   });
 }
 
-const weekdayLabels = [
-  "Sun",
-  "Mon",
-  "Tue",
-  "Wed",
-  "Thu",
-  "Fri",
-  "Sat",
-];
+const weekdayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export default function CalendarSection() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
 
   const today = new Date();
-  const currentYear = today.getFullYear();
-  const currentMonth = today.getMonth();
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth();
+
+  function goToPreviousMonth() {
+    setCurrentDate(
+      (prev) => new Date(prev.getFullYear(), prev.getMonth() - 1, 1),
+    );
+  }
+
+  function goToNextMonth() {
+    setCurrentDate(
+      (prev) => new Date(prev.getFullYear(), prev.getMonth() + 1, 1),
+    );
+  }
 
   useEffect(() => {
     async function fetchTasks() {
@@ -73,14 +80,23 @@ export default function CalendarSection() {
   }, [currentYear, currentMonth]);
 
   return (
-    <section>
+    <section className="calendar-section">
       <h2>Dagatal</h2>
-      <h3>
-        {today.toLocaleDateString("is-IS", {
-          month: "long",
-          year: "numeric",
-        })}
-      </h3>
+      <div className="calendar-topbar">
+        <h3 className="calendar-title">
+          {currentDate.toLocaleDateString("is-IS", {
+            month: "long",
+            year: "numeric",
+          })}
+        </h3>
+
+        <button type="button" onClick={goToPreviousMonth}>
+          ← Fyrri
+        </button>
+        <button type="button" onClick={goToNextMonth}>
+          Næsti →
+        </button>
+      </div>
 
       {loading && <p>Hleður dagatali...</p>}
 
@@ -94,7 +110,9 @@ export default function CalendarSection() {
 
           {calendarDays.map((date, index) => {
             if (!date) {
-              return <div key={`empty-${index}`} className="calendar-cell empty" />;
+              return (
+                <div key={`empty-${index}`} className="calendar-cell empty" />
+              );
             }
 
             const tasksForDay = getTasksForDate(tasks, date);
@@ -111,7 +129,9 @@ export default function CalendarSection() {
                   {tasksForDay.map((task) => (
                     <li
                       key={task.id}
-                      className={task.completed ? "completed-task" : ""}
+                      className={`calendar-task ${
+                        task.completed ? "completed" : ""
+                      }`}
                     >
                       {task.title}
                     </li>

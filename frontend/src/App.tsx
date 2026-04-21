@@ -7,15 +7,17 @@ import "./styles/app.css";
 
 function App() {
   return (
-    <div className="app">
-      <h1>Skipulagsapp</h1>
+    <div className="app-container">
+      <h1>Skipuleggi</h1>
       <Navigation />
 
-      <Routes>
-        <Route path="/" element={<TasksPage />} />
-        <Route path="/venjur" element={<HabitsPage />} />
-        <Route path="/dagatal" element={<CalendarPage />} />
-      </Routes>
+      <main className="content">
+        <Routes>
+          <Route path="/" element={<TasksPage />} />
+          <Route path="/venjur" element={<HabitsPage />} />
+          <Route path="/dagatal" element={<CalendarPage />} />
+        </Routes>
+      </main>
     </div>
   );
 }

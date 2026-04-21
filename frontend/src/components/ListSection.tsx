@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import type { List } from '../types';
+import { useEffect, useState } from "react";
+import type { List } from "../types";
+import "../styles/lists.css";
 
 type ListSectionProps = {
   selectedListId: number | null;
@@ -11,17 +12,17 @@ export default function ListSection({
   onSelectList,
 }: ListSectionProps) {
   const [lists, setLists] = useState<List[]>([]);
-  const [newListName, setNewListName] = useState('');
+  const [newListName, setNewListName] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchLists() {
       try {
-        const res = await fetch('http://localhost:3000/lists');
+        const res = await fetch("http://localhost:3000/lists");
         const data = await res.json();
         setLists(data);
       } catch (error) {
-        console.error('Error fetching lists:', error);
+        console.error("Error fetching lists:", error);
       } finally {
         setLoading(false);
       }
@@ -36,10 +37,10 @@ export default function ListSection({
     if (!newListName.trim()) return;
 
     try {
-      const res = await fetch('http://localhost:3000/lists', {
-        method: 'POST',
+      const res = await fetch("http://localhost:3000/lists", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ name: newListName }),
       });
@@ -47,29 +48,29 @@ export default function ListSection({
       const createdList: List = await res.json();
 
       setLists((prev) => [createdList, ...prev]);
-      setNewListName('');
+      setNewListName("");
     } catch (error) {
-      console.error('Error creating list:', error);
+      console.error("Error creating list:", error);
     }
   }
 
   async function handleDeleteList(id: number) {
-  try {
-    await fetch(`http://localhost:3000/lists/${id}`, {
-      method: 'DELETE',
-    });
+    try {
+      await fetch(`http://localhost:3000/lists/${id}`, {
+        method: "DELETE",
+      });
 
-    setLists((prev) => prev.filter((l) => l.id !== id));
-  } catch (error) {
-    console.error('Error deleting list:', error);
+      setLists((prev) => prev.filter((l) => l.id !== id));
+    } catch (error) {
+      console.error("Error deleting list:", error);
+    }
   }
-}
 
   return (
-    <section>
+    <section className="list-section">
       <h2>Listar</h2>
 
-      <form onSubmit={handleAddList}>
+      <form className="list-form" onSubmit={handleAddList}>
         <input
           type="text"
           placeholder="Nýr listi"
@@ -83,26 +84,29 @@ export default function ListSection({
 
       {!loading && lists.length === 0 && <p>Engir listar enn.</p>}
 
-      <ul>
+      <ul className="list-container">
         {lists.map((list) => (
-          <li key={list.id}>
+          <li
+            key={list.id}
+            className={`list-item ${
+              selectedListId === list.id ? "active" : ""
+            }`}
+          >
             <button
               type="button"
+              className="list-select-btn"
               onClick={() => onSelectList(list.id)}
-              style={{
-                fontWeight: selectedListId === list.id ? 'bold' : 'normal',
-                color: selectedListId === list.id ? 'blue' : 'black',
-              }}
             >
               {list.name}
             </button>
+
             <button
-  type="button"
-  onClick={() => handleDeleteList(list.id)}
-  style={{ marginLeft: '0.5rem' }}
->
-  Eyða
-</button>
+              type="button"
+              className="list-delete-btn"
+              onClick={() => handleDeleteList(list.id)}
+            >
+              Eyða
+            </button>
           </li>
         ))}
       </ul>
