@@ -1,0 +1,6 @@
+.tasks-page {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
