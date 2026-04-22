@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Task } from "../types";
+import { API_URL } from "../lib/api";
 import "../styles/calendar.css";
 
 function getDateKey(date: Date) {
@@ -46,7 +47,7 @@ export default function CalendarSection() {
   useEffect(() => {
     async function fetchTasks() {
       try {
-        const res = await fetch("http://localhost:3000/tasks");
+        const res = await fetch(`${API_URL}/tasks`);
         const data = await res.json();
         setTasks(data);
       } catch (error) {

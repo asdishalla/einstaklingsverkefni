@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Habit } from "../types";
+import { API_URL } from "../lib/api";
 import "../styles/habits.css";
 
 const dayOptions = [
@@ -60,7 +61,7 @@ export default function HabitSection() {
   useEffect(() => {
     async function fetchHabits() {
       try {
-        const res = await fetch("http://localhost:3000/habits");
+        const res = await fetch(`${API_URL}/habits`);
         const data = await res.json();
         setHabits(data);
       } catch (error) {
@@ -92,7 +93,7 @@ export default function HabitSection() {
 
   async function handleDeleteHabit(habitId: number) {
     try {
-      await fetch(`http://localhost:3000/habits/${habitId}`, {
+      await fetch(`${API_URL}/habits/${habitId}`, {
         method: "DELETE",
       });
 
@@ -120,20 +121,17 @@ export default function HabitSection() {
 
     try {
       if (editingHabitId !== null) {
-        const res = await fetch(
-          `http://localhost:3000/habits/${editingHabitId}`,
-          {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: newHabitName,
-              timeOfDay,
-              days: daysForBackend,
-            }),
+        const res = await fetch(`${API_URL}/habits/${editingHabitId}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify({
+            name: newHabitName,
+            timeOfDay,
+            days: daysForBackend,
+          }),
+        });
 
         const updatedHabit: Habit = await res.json();
 
@@ -145,7 +143,7 @@ export default function HabitSection() {
 
         setEditingHabitId(null);
       } else {
-        const res = await fetch("http://localhost:3000/habits", {
+        const res = await fetch(`${API_URL}/habits`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -172,12 +170,9 @@ export default function HabitSection() {
 
   async function handleCompleteHabit(habitId: number) {
     try {
-      const res = await fetch(
-        `http://localhost:3000/habits/${habitId}/complete`,
-        {
-          method: "POST",
-        },
-      );
+      const res = await fetch(`${API_URL}/habits/${habitId}/complete`, {
+        method: "POST",
+      });
 
       if (!res.ok) {
         const errorData = await res.json();
@@ -185,7 +180,7 @@ export default function HabitSection() {
         return;
       }
 
-      const habitsRes = await fetch("http://localhost:3000/habits");
+      const habitsRes = await fetch(`${API_URL}/habits`);
       const updatedHabits = await habitsRes.json();
       setHabits(updatedHabits);
     } catch (error) {

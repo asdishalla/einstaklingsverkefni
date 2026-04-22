@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Task } from "../types";
+import { API_URL } from "../lib/api";
 import "../styles/tasks.css";
 
 type TaskSectionProps = {
@@ -24,7 +25,7 @@ export default function TaskSection({ selectedListId }: TaskSectionProps) {
   useEffect(() => {
     async function fetchTasks() {
       try {
-        const res = await fetch("http://localhost:3000/tasks");
+        const res = await fetch(`${API_URL}/tasks`);
         const data = await res.json();
         setTasks(data);
       } catch (error) {
@@ -49,21 +50,18 @@ export default function TaskSection({ selectedListId }: TaskSectionProps) {
 
     try {
       if (editingTaskId !== null) {
-        const res = await fetch(
-          `http://localhost:3000/tasks/${editingTaskId}`,
-          {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              title: newTaskTitle,
-              dueDate: newTaskDueDate
-                ? new Date(newTaskDueDate).toISOString()
-                : null,
-            }),
+        const res = await fetch(`${API_URL}/tasks/${editingTaskId}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify({
+            title: newTaskTitle,
+            dueDate: newTaskDueDate
+              ? new Date(newTaskDueDate).toISOString()
+              : null,
+          }),
+        });
 
         const updatedTask: Task = await res.json();
 
@@ -73,7 +71,7 @@ export default function TaskSection({ selectedListId }: TaskSectionProps) {
 
         setEditingTaskId(null);
       } else {
-        const res = await fetch("http://localhost:3000/tasks", {
+        const res = await fetch(`${API_URL}/tasks`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -101,7 +99,7 @@ export default function TaskSection({ selectedListId }: TaskSectionProps) {
 
   async function handleToggleCompleted(task: Task) {
     try {
-      const res = await fetch(`http://localhost:3000/tasks/${task.id}`, {
+      const res = await fetch(`${API_URL}/tasks/${task.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -123,7 +121,7 @@ export default function TaskSection({ selectedListId }: TaskSectionProps) {
 
   async function handleDeleteTask(taskId: number) {
     try {
-      await fetch(`http://localhost:3000/tasks/${taskId}`, {
+      await fetch(`${API_URL}/tasks/${taskId}`, {
         method: "DELETE",
       });
 

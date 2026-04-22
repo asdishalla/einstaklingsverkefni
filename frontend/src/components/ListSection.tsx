@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { List } from "../types";
+import { API_URL } from "../lib/api";
 import "../styles/lists.css";
 
 type ListSectionProps = {
@@ -18,7 +19,7 @@ export default function ListSection({
   useEffect(() => {
     async function fetchLists() {
       try {
-        const res = await fetch("http://localhost:3000/lists");
+        const res = await fetch(`${API_URL}/lists`);
         const data = await res.json();
         setLists(data);
       } catch (error) {
@@ -37,7 +38,7 @@ export default function ListSection({
     if (!newListName.trim()) return;
 
     try {
-      const res = await fetch("http://localhost:3000/lists", {
+      const res = await fetch(`${API_URL}/lists`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +57,7 @@ export default function ListSection({
 
   async function handleDeleteList(id: number) {
     try {
-      await fetch(`http://localhost:3000/lists/${id}`, {
+      await fetch(`${API_URL}/lists/${id}`, {
         method: "DELETE",
       });
 
