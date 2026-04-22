@@ -105,45 +105,47 @@ export default function CalendarSection() {
       {loading && <p>Hleður dagatali...</p>}
 
       {!loading && (
-        <div className="calendar">
-          {weekdayLabels.map((label) => (
-            <div key={label} className="calendar-header-cell">
-              {label}
-            </div>
-          ))}
-
-          {calendarDays.map((date, index) => {
-            if (!date) {
-              return (
-                <div key={`empty-${index}`} className="calendar-cell empty" />
-              );
-            }
-
-            const tasksForDay = getTasksForDate(tasks, date);
-            const isToday = getDateKey(date) === getDateKey(today);
-
-            return (
-              <div
-                key={date.toISOString()}
-                className={`calendar-cell ${isToday ? "today" : ""}`}
-              >
-                <div className="calendar-date">{date.getDate()}</div>
-
-                <ul className="calendar-task-list">
-                  {tasksForDay.map((task) => (
-                    <li
-                      key={task.id}
-                      className={`calendar-task ${
-                        task.completed ? "completed" : ""
-                      }`}
-                    >
-                      {task.title}
-                    </li>
-                  ))}
-                </ul>
+        <div className="calendar-scroll">
+          <div className="calendar">
+            {weekdayLabels.map((label) => (
+              <div key={label} className="calendar-header-cell">
+                {label}
               </div>
-            );
-          })}
+            ))}
+
+            {calendarDays.map((date, index) => {
+              if (!date) {
+                return (
+                  <div key={`empty-${index}`} className="calendar-cell empty" />
+                );
+              }
+
+              const tasksForDay = getTasksForDate(tasks, date);
+              const isToday = getDateKey(date) === getDateKey(today);
+
+              return (
+                <div
+                  key={date.toISOString()}
+                  className={`calendar-cell ${isToday ? "today" : ""}`}
+                >
+                  <div className="calendar-date">{date.getDate()}</div>
+
+                  <ul className="calendar-task-list">
+                    {tasksForDay.map((task) => (
+                      <li
+                        key={task.id}
+                        className={`calendar-task ${
+                          task.completed ? "completed" : ""
+                        }`}
+                      >
+                        {task.title}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
     </section>

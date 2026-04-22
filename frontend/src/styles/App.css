@@ -84,3 +84,10 @@ select {
     margin-top: 1rem;
   }
 }
+
+button,
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  width: 100%;
+}

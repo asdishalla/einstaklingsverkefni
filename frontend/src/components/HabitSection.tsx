@@ -225,7 +225,7 @@ export default function HabitSection() {
                 checked={selectedDays.includes(day)}
                 onChange={() => handleToggleDay(day)}
               />
-              {day}
+              <span>{day}</span>
             </label>
           ))}
         </div>

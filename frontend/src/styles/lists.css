@@ -13,11 +13,18 @@
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 .list-form input {
   min-width: 0;
   flex: 1;
+  width: auto;
+}
+
+.list-form button {
+  width: auto;
+  flex: 0 0 auto;
 }
 
 .list-container {
@@ -63,6 +70,8 @@
   cursor: pointer;
   color: #f9fafb;
   white-space: nowrap;
+  width: auto;
+  max-width: 100%;
 }
 
 .list-delete-btn {
@@ -81,6 +90,11 @@
 @media (max-width: 600px) {
   .list-form {
     flex-direction: column;
+  }
+
+  .list-form input,
+  .list-form button {
+    width: 100%;
   }
 
   .list-item {

@@ -19,17 +19,36 @@
 }
 
 .habit-day-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: center;
+  width: 100%;
+  max-width: 700px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
 }
 
 .habit-day-option {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+  min-width: 0;
 }
+
+.habit-day-option input[type="checkbox"] {
+  margin: 0;
+  width: auto;
+  max-width: none;
+  flex: 0 0 auto;
+}
+
+.habit-day-option span {
+  display: block;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 
 .habit-form-actions {
   display: flex;
@@ -37,6 +56,7 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
 
 .habit-group {
   margin-top: 1.5rem;
@@ -50,6 +70,7 @@
   padding: 0;
   list-style: none;
 }
+
 
 .habit-item {
   display: flex;
@@ -65,6 +86,7 @@
 .habit-item.completed {
   opacity: 0.65;
 }
+
 
 .habit-main {
   line-height: 1.5;
@@ -88,6 +110,7 @@
   word-break: break-word;
 }
 
+
 .habit-actions {
   display: flex;
   gap: 0.5rem;
@@ -101,6 +124,7 @@
   width: auto;
 }
 
+
 @media (max-width: 600px) {
   .habit-form {
     align-items: stretch;
@@ -112,7 +136,7 @@
   }
 
   .habit-day-options {
-    justify-content: flex-start;
+    grid-template-columns: 1fr;
   }
 
   .habit-form-actions {
@@ -132,7 +156,6 @@
   .habit-main {
     width: 100%;
     text-align: left;
-    align-items: flex-start;
   }
 
   .habit-actions {

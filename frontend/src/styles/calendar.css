@@ -9,7 +9,7 @@
 }
 
 .calendar-section h3 {
-    color: rgb(28, 28, 28);
+  color: rgb(28, 28, 28);
 }
 
 .calendar-topbar {
@@ -33,10 +33,17 @@
   flex-wrap: wrap;
 }
 
+.calendar-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 0.75rem;
+  min-width: 820px;
 }
 
 .calendar-header-cell {
@@ -55,6 +62,7 @@
   flex-direction: column;
   gap: 0.4rem;
   transition: transform 0.15s, box-shadow 0.15s;
+  min-width: 0;
 }
 
 .calendar-cell:hover {
@@ -92,6 +100,8 @@
   background: #f2d5ff;
   padding: 0.2rem 0.4rem;
   border-radius: 6px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .calendar-task.completed {
@@ -102,6 +112,7 @@
 @media (max-width: 700px) {
   .calendar {
     gap: 0.35rem;
+    min-width: 700px;
   }
 
   .calendar-header-cell {
