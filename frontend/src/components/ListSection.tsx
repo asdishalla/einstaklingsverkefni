@@ -71,46 +71,48 @@ export default function ListSection({
     <section className="list-section">
       <h2>Listar</h2>
 
-      <form className="list-form" onSubmit={handleAddList}>
-        <input
-          type="text"
-          placeholder="Nýr listi"
-          value={newListName}
-          onChange={(e) => setNewListName(e.target.value)}
-        />
-        <button type="submit">Bæta við</button>
-      </form>
+      <div className="list-content-wrap">
+        <form className="list-form" onSubmit={handleAddList}>
+          <input
+            type="text"
+            placeholder="Nýr listi"
+            value={newListName}
+            onChange={(e) => setNewListName(e.target.value)}
+          />
+          <button type="submit">Bæta við</button>
+        </form>
 
-      {loading && <p>Hleður listum...</p>}
+        {loading && <p>Hleður listum...</p>}
 
-      {!loading && lists.length === 0 && <p>Engir listar enn.</p>}
+        {!loading && lists.length === 0 && <p>Engir listar enn.</p>}
 
-      <ul className="list-container">
-        {lists.map((list) => (
-          <li
-            key={list.id}
-            className={`list-item ${
-              selectedListId === list.id ? "active" : ""
-            }`}
-          >
-            <button
-              type="button"
-              className="list-select-btn"
-              onClick={() => onSelectList(list.id)}
+        <ul className="list-container">
+          {lists.map((list) => (
+            <li
+              key={list.id}
+              className={`list-item ${
+                selectedListId === list.id ? "active" : ""
+              }`}
             >
-              {list.name}
-            </button>
+              <button
+                type="button"
+                className="list-select-btn"
+                onClick={() => onSelectList(list.id)}
+              >
+                {list.name}
+              </button>
 
-            <button
-              type="button"
-              className="list-delete-btn"
-              onClick={() => handleDeleteList(list.id)}
-            >
-              Eyða
-            </button>
-          </li>
-        ))}
-      </ul>
+              <button
+                type="button"
+                className="list-delete-btn"
+                onClick={() => handleDeleteList(list.id)}
+              >
+                Eyða
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }

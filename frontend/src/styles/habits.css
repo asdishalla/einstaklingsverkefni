@@ -1,6 +1,7 @@
 .habit-section h2,
 .habit-section h3 {
   text-align: center;
+  color: black;
 }
 
 .habit-form {
@@ -45,6 +46,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .habit-item {
@@ -52,7 +56,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  padding: 0.9rem 1rem;
+  padding: 1rem 1.1rem;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   background: #fafafa;
@@ -66,10 +70,22 @@
   line-height: 1.5;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   flex: 1;
-  text-align: center;
+  min-width: 0;
+  text-align: left;
+  align-items: flex-start;
+}
+
+.habit-name {
+  font-size: 1.05rem;
+  color: #111827;
+}
+
+.habit-meta {
+  color: #69707d;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .habit-actions {
@@ -78,4 +94,54 @@
   flex-shrink: 0;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.habit-actions button {
+  width: auto;
+}
+
+@media (max-width: 600px) {
+  .habit-form {
+    align-items: stretch;
+  }
+
+  .habit-form input,
+  .habit-form select {
+    max-width: 100%;
+  }
+
+  .habit-day-options {
+    justify-content: flex-start;
+  }
+
+  .habit-form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .habit-form-actions button {
+    width: 100%;
+  }
+
+  .habit-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .habit-main {
+    width: 100%;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .habit-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .habit-actions button {
+    width: auto;
+    flex: 0 1 auto;
+  }
 }

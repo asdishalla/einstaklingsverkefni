@@ -4,6 +4,7 @@ import TasksPage from "./pages/TasksPage";
 import HabitsPage from "./pages/HabitsPage";
 import CalendarPage from "./pages/CalendarPage";
 import "./styles/App.css";
+import TitleManager from "./components/TitleManager";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       </header>
 
       <main className="content">
+        <TitleManager />
         <Routes>
           <Route path="/" element={<TasksPage />} />
           <Route path="/venjur" element={<HabitsPage />} />

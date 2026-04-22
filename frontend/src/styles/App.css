@@ -33,17 +33,19 @@
 }
 
 button {
-  background: #d345bb;
+  background: #f372dd;
   color: #ffffff;
   border: none;
   border-radius: 10px;
   padding: 0.6rem 0.9rem;
   cursor: pointer;
   font-weight: 600;
+  max-width: 100%;
 }
 
 button:hover {
-  background: #e5e7eb;
+  background: #f372dd;
+  transform: translateY(-1px);
 }
 
 button:disabled {
@@ -55,6 +57,7 @@ select {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 0.6rem;
+  max-width: 100%;
 }
 
 .app-footer {
@@ -68,4 +71,16 @@ select {
   text-align: center;
   margin: 0;
   color: var(--text);
+}
+
+@media (max-width: 600px) {
+  .app-container {
+    padding: 1rem;
+    border-inline: none;
+  }
+
+  .app-title {
+    font-size: 2rem;
+    margin-top: 1rem;
+  }
 }

@@ -5,6 +5,11 @@
 .calendar-section h2 {
   text-align: center;
   margin-bottom: 1rem;
+  color: rgb(28, 28, 28);
+}
+
+.calendar-section h3 {
+    color: rgb(28, 28, 28);
 }
 
 .calendar-topbar {
@@ -65,7 +70,7 @@
 
 .calendar-cell.today {
   border: 2px solid #d345bb;
-  background: #eef2ff;
+  background: #fdf1ff;
 }
 
 .calendar-date {
@@ -84,7 +89,7 @@
 
 .calendar-task {
   font-size: 0.8rem;
-  background: #eef2ff;
+  background: #f2d5ff;
   padding: 0.2rem 0.4rem;
   border-radius: 6px;
 }
@@ -92,4 +97,40 @@
 .calendar-task.completed {
   text-decoration: line-through;
   opacity: 0.6;
+}
+
+@media (max-width: 700px) {
+  .calendar {
+    gap: 0.35rem;
+  }
+
+  .calendar-header-cell {
+    font-size: 0.75rem;
+  }
+
+  .calendar-cell {
+    min-height: 80px;
+    padding: 0.35rem;
+    border-radius: 10px;
+    gap: 0.25rem;
+  }
+
+  .calendar-date {
+    font-size: 0.75rem;
+  }
+
+  .calendar-task {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.3rem;
+    line-height: 1.2;
+  }
+
+  .calendar-nav {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .calendar-nav button {
+    width: auto;
+  }
 }

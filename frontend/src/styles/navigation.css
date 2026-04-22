@@ -21,7 +21,7 @@
 }
 
 .nav-link.active {
-  background: #d345bb;
+  background: #f372dd;
   color: white;
   box-shadow: 0 4px 10px rgba(211, 69, 187, 0.25);
 }

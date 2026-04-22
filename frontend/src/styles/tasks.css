@@ -30,6 +30,7 @@
   border-radius: 12px;
   border: 1px solid #e5e7eb;
   background: #fafafa;
+  flex-wrap: wrap;
 }
 
 .task-item.completed {
@@ -55,6 +56,7 @@
   flex-shrink: 0;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .task-due-date {
@@ -69,6 +71,7 @@
   align-items: center;
   gap: 0.5rem;
   justify-content: center;
+  min-width: 0;
 }
 
 .task-label input {
@@ -81,4 +84,44 @@
 
 .task-empty-message {
   text-align: center;
+}
+
+@media (max-width: 600px) {
+  .task-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .task-form input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .task-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .task-main {
+    width: 100%;
+    text-align: left;
+  }
+
+  .task-label {
+    justify-content: flex-start;
+  }
+
+  .task-due-date {
+    text-align: left;
+  }
+
+  .task-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .task-actions button {
+    width: auto;
+    flex: 0 1 auto;
+  }
 }

@@ -267,9 +267,13 @@ export default function HabitSection() {
                   className={`habit-item ${completedToday ? "completed" : ""}`}
                 >
                   <div className="habit-main">
-                    <strong>{habit.name}</strong> -{" "}
-                    {timeLabels[habit.timeOfDay] ?? habit.timeOfDay} - Streak:{" "}
-                    {habit.streak}
+                    <div className="habit-name">
+                      <strong>{habit.name}</strong>
+                    </div>
+                    <div className="habit-meta">
+                      {timeLabels[habit.timeOfDay] ?? habit.timeOfDay}
+                    </div>
+                    <div className="habit-meta">Streak: {habit.streak}</div>
                   </div>
 
                   <div className="habit-actions">
@@ -304,18 +308,22 @@ export default function HabitSection() {
                 className={`habit-item ${completedToday ? "completed" : ""}`}
               >
                 <div className="habit-main">
-                  <strong>{habit.name}</strong> -{" "}
-                  {timeLabels[habit.timeOfDay] ?? habit.timeOfDay}
-                  <br />
-                  Dagar:{" "}
-                  {habit.days
-                    .map(
-                      (day) =>
-                        englishToIcelandicDay[day.dayOfWeek] ?? day.dayOfWeek,
-                    )
-                    .join(", ")}
-                  <br />
-                  Streak: {habit.streak}
+                  <div className="habit-name">
+                    <strong>{habit.name}</strong>
+                  </div>
+                  <div className="habit-meta">
+                    {timeLabels[habit.timeOfDay] ?? habit.timeOfDay}
+                  </div>
+                  <div className="habit-meta">
+                    Dagar:{" "}
+                    {habit.days
+                      .map(
+                        (day) =>
+                          englishToIcelandicDay[day.dayOfWeek] ?? day.dayOfWeek,
+                      )
+                      .join(", ")}
+                  </div>
+                  <div className="habit-meta">Streak: {habit.streak}</div>
                 </div>
 
                 <div className="habit-actions">
