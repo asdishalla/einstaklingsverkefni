@@ -82,6 +82,7 @@ export default function CalendarSection() {
   return (
     <section className="calendar-section">
       <h2>Dagatal</h2>
+
       <div className="calendar-topbar">
         <h3 className="calendar-title">
           {currentDate.toLocaleDateString("is-IS", {
@@ -90,12 +91,14 @@ export default function CalendarSection() {
           })}
         </h3>
 
-        <button type="button" onClick={goToPreviousMonth}>
-          ← Fyrri
-        </button>
-        <button type="button" onClick={goToNextMonth}>
-          Næsti →
-        </button>
+        <div className="calendar-nav">
+          <button type="button" onClick={goToPreviousMonth}>
+            ← Fyrri
+          </button>
+          <button type="button" onClick={goToNextMonth}>
+            Næsti →
+          </button>
+        </div>
       </div>
 
       {loading && <p>Hleður dagatali...</p>}

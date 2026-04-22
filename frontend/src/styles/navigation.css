@@ -1,6 +1,7 @@
 .navigation {
   display: flex;
-  gap: 1rem;
+  justify-content: center;
+  gap: 0.75rem;
   margin-bottom: 2rem;
 }
 
@@ -8,17 +9,19 @@
   text-decoration: none;
   padding: 0.6rem 1rem;
   border-radius: 10px;
-  background: #e5e7eb;
-  color: #374151;
+  background: #f3f4f6;
+  color: #6b7280;
   font-weight: 600;
   transition: all 0.2s;
 }
 
 .nav-link:hover {
-  background: #d1d5db;
+  background: #e5e7eb;
+  transform: translateY(-1px);
 }
 
 .nav-link.active {
-  background: #4f46e5;
+  background: #d345bb;
   color: white;
+  box-shadow: 0 4px 10px rgba(211, 69, 187, 0.25);
 }

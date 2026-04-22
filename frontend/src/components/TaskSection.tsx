@@ -137,7 +137,11 @@ export default function TaskSection({ selectedListId }: TaskSectionProps) {
     <section className="task-section">
       <h2>Verkefni</h2>
 
-      {selectedListId === null && <p>Veldu lista til þess að sjá verkefni.</p>}
+      {selectedListId === null && (
+        <p className="task-empty-message">
+          Veldu lista til þess að sjá verkefni.
+        </p>
+      )}
 
       {selectedListId !== null && (
         <>

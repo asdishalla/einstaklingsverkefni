@@ -3,13 +3,15 @@ import Navigation from "./components/Navigation";
 import TasksPage from "./pages/TasksPage";
 import HabitsPage from "./pages/HabitsPage";
 import CalendarPage from "./pages/CalendarPage";
-import "./styles/app.css";
+import "./styles/App.css";
 
 function App() {
   return (
     <div className="app-container">
-      <h1>Skipuleggi</h1>
-      <Navigation />
+      <header className="app-header">
+        <h1 className="app-title">Skipuleggi</h1>
+        <Navigation />
+      </header>
 
       <main className="content">
         <Routes>
@@ -18,6 +20,12 @@ function App() {
           <Route path="/dagatal" element={<CalendarPage />} />
         </Routes>
       </main>
+
+      <footer className="app-footer">
+        <h3 className="app-footer-text">
+          Einstaklingsverkefni - Vefforritun 2
+        </h3>
+      </footer>
     </div>
   );
 }

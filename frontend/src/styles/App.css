@@ -1,24 +1,49 @@
 :root {
-  --primary: #4f46e5;
-  --bg: #f3f4f8;
-  --card: #ffffff;
-  --border: #e5e7eb;
-  --text: #1f2937;
+  --text: #374151;
+  --text-h: #111827;
+  --bg: #ffffff;
+  --border: #d1d5db;
 }
 
-body {
-  background: var(--bg);
-  background: #f3f4f8;
-  color: var(--text);
+.app-container {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-inline: 1px solid #e5e4e7;
+  min-height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.app-title {
+  margin: 1.5rem 0 0.5rem;
+  text-align: center;
+  color: var(--text-h);
+}
+
+.content {
+  width: 100%;
+  margin-bottom: 2rem;
 }
 
 button {
-  background: var(--primary);
-  color: white;
+  background: #d345bb;
+  color: #ffffff;
   border: none;
   border-radius: 10px;
   padding: 0.6rem 0.9rem;
   cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #e5e7eb;
 }
 
 button:disabled {
@@ -32,22 +57,15 @@ select {
   padding: 0.6rem;
 }
 
-.app h1 {
-  margin-bottom: 0.5rem;
-}
-
-.navigation {
+.app-footer {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
 }
 
-.app-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 1rem;
-}
-
-.content {
-  width: 100%;
+.app-footer-text {
+  text-align: center;
+  margin: 0;
+  color: var(--text);
 }

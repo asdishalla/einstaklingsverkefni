@@ -4,15 +4,19 @@ import "../styles/navigation.css";
 export default function Navigation() {
   return (
     <nav className="navigation">
+      {" "}
       <NavLink to="/" className="nav-link">
-        Verkefni
-      </NavLink>
+        {" "}
+        Verkefni{" "}
+      </NavLink>{" "}
       <NavLink to="/venjur" className="nav-link">
-        Venjur
-      </NavLink>
+        {" "}
+        Venjur{" "}
+      </NavLink>{" "}
       <NavLink to="/dagatal" className="nav-link">
-        Dagatal
-      </NavLink>
+        {" "}
+        Dagatal{" "}
+      </NavLink>{" "}
     </nav>
   );
 }

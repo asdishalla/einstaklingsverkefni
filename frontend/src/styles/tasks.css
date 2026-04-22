@@ -1,8 +1,18 @@
+.task-section h2 {
+  text-align: center;
+  color: black;
+}
+
 .task-form {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.task-form input {
+  min-width: 260px;
 }
 
 .task-list {
@@ -43,12 +53,15 @@
   display: flex;
   gap: 0.5rem;
   flex-shrink: 0;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .task-due-date {
   font-size: 0.9rem;
-  color: #6b7280;
+  color: #69707d;
   margin-top: 0.2rem;
+  text-align: center;
 }
 
 .task-label {
@@ -58,6 +71,14 @@
   justify-content: center;
 }
 
+.task-label input {
+  margin: 0;
+}
+
 .task-title {
+  text-align: center;
+}
+
+.task-empty-message {
   text-align: center;
 }

@@ -2,9 +2,30 @@
   width: 100%;
 }
 
-.calendar-title {
+.calendar-section h2 {
+  text-align: center;
   margin-bottom: 1rem;
+}
+
+.calendar-topbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.calendar-title {
+  margin: 0;
   text-transform: capitalize;
+  text-align: center;
+}
+
+.calendar-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .calendar {
@@ -39,10 +60,11 @@
 .calendar-cell.empty {
   background: transparent;
   border: none;
+  box-shadow: none;
 }
 
 .calendar-cell.today {
-  border: 2px solid #4f46e5;
+  border: 2px solid #d345bb;
   background: #eef2ff;
 }
 
@@ -55,6 +77,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .calendar-task {
