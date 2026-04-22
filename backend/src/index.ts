@@ -16,9 +16,11 @@ app.route('/lists', listsRoutes);
 app.route('/tasks', tasksRoutes);
 app.route('/habits', habitsRoutes);
 
+const port = Number(process.env.PORT) || 3000;
+
 serve({
   fetch: app.fetch,
-  port: 3000,
+  port,
 });
 
-console.log('Server running on http://localhost:3000');
+console.log(`Server running on http://localhost:${port}`);

@@ -1,10 +1,9 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 model List {
@@ -15,14 +14,14 @@ model List {
 }
 
 model Task {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   title     String
-  completed Boolean  @default(false)
+  completed Boolean   @default(false)
   dueDate   DateTime?
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
 
-  listId    Int
-  list      List     @relation(fields: [listId], references: [id], onDelete: Cascade)
+  listId Int
+  list   List @relation(fields: [listId], references: [id], onDelete: Cascade)
 }
 
 model Habit {
@@ -35,17 +34,17 @@ model Habit {
 }
 
 model HabitDay {
-  id        Int   @id @default(autoincrement())
+  id        Int    @id @default(autoincrement())
   dayOfWeek String
 
-  habitId   Int
-  habit     Habit @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  habitId Int
+  habit   Habit @relation(fields: [habitId], references: [id], onDelete: Cascade)
 }
 
 model HabitCompletion {
   id            Int      @id @default(autoincrement())
   completedDate DateTime
 
-  habitId       Int
-  habit         Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  habitId Int
+  habit   Habit @relation(fields: [habitId], references: [id], onDelete: Cascade)
 }
